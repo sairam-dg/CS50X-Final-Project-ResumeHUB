@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Edit contact - ResumeHub{% endblock %}
+
+{% block content %}
+    <h1>Contact details</h1>
+
+    <form action="/edit/contact" method="post">
+        <div>
+            <label for="full_name">Full name</label>
+            <input type="text" id="full_name" name="full_name" value="{{ contact.full_name or '' }}" required>
+        </div>
+
+        <div>
+            <label for="phone">Phone</label>
+            <input type="text" id="phone" name="phone" value="{{ contact.phone or '' }}">
+        </div>
+
+        <div>
+            <label for="location">Location</label>
+            <input type="text" id="location" name="location" value="{{ contact.location or '' }}" placeholder="City, Country">
+        </div>
+
+        <div>
+            <label for="linkedin">LinkedIn</label>
+            <input type="text" id="linkedin" name="linkedin" value="{{ contact.linkedin or '' }}">
+        </div>
+
+        <div>
+            <label for="github">GitHub</label>
+            <input type="text" id="github" name="github" value="{{ contact.github or '' }}">
+        </div>
+
+        <div>
+            <label for="portfolio">Portfolio</label>
+            <input type="text" id="portfolio" name="portfolio" value="{{ contact.portfolio or '' }}">
+        </div>
+
+        <button type="submit">Save</button>
+        <a href="/dashboard">Back to dashboard</a>
+    </form>
+{% endblock %}

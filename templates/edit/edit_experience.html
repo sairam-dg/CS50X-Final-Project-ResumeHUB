@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Experience - ResumeHub{% endblock %}
+
+{% block content %}
+    <h1>Experience</h1>
+
+    {% if entries %}
+        <ul class="entries">
+            {% for e in entries %}
+                <li>
+                    <strong>{{ e.role }}</strong>, {{ e.company }}
+                    ({{ e.start_date or '' }} - {{ e.end_date or '' }})
+                    <a href="/edit/experience/{{ e.exp_id }}">Edit</a>
+                    <form action="/edit/experience/{{ e.exp_id }}/delete" method="post"
+                          onsubmit="return confirm('Delete this entry?')">
+                        <button type="submit">Delete</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No experience entries yet.</p>
+    {% endif %}
+
+    <h2>{% if entry %}Edit entry{% else %}Add an entry{% endif %}</h2>
+
+    <form action="{% if entry %}/edit/experience/{{ entry.exp_id }}{% else %}/edit/experience{% endif %}" method="post">
+        <div>
+            <label for="company">Company</label>
+            <input type="text" id="company" name="company" value="{{ entry.company if entry else '' }}" required>
+        </div>
+
+        <div>
+            <label for="role">Role</label>
+            <input type="text" id="role" name="role" value="{{ entry.role if entry else '' }}" required>
+        </div>
+
+        <div>
+            <label for="start_date">Start date</label>
+            <input type="text" id="start_date" name="start_date" value="{{ entry.start_date if entry and entry.start_date else '' }}" placeholder="Jun 2025">
+        </div>
+
+        <div>
+            <label for="end_date">End date</label>
+            <input type="text" id="end_date" name="end_date" value="{{ entry.end_date if entry and entry.end_date else '' }}" placeholder="Aug 2025 or Present">
+        </div>
+
+        <div>
+            <label for="description">What you did (one bullet point per line)</label>
+            <textarea id="description" name="description" rows="6">{{ entry.description if entry and entry.description else '' }}</textarea>
+        </div>
+
+        <button type="submit">{% if entry %}Save changes{% else %}Add{% endif %}</button>
+        {% if entry %}<a href="/edit/experience">Cancel</a>{% endif %}
+        <a href="/dashboard">Back to dashboard</a>
+    </form>
+{% endblock %}

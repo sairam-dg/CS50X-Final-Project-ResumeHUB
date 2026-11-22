@@ -1,0 +1,5 @@
+flask 
+flask-login
+cs50
+python-dotenv
+playwright

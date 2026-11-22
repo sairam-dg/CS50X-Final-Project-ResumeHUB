@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ contact.full_name or 'Resume' }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/resume.css') }}">
+</head>
+<body>
+
+{% if preview %}
+<div class="toolbar">
+    <a href="/dashboard">Back to dashboard</a>
+    <a href="/download">Download PDF</a>
+</div>
+{% endif %}
+
+<div class="resume">
+
+    <header>
+        <h1>{{ contact.full_name or 'Your Name' }}</h1>
+        <p class="contact-line">
+            {{ [email, contact.phone, contact.location] | select | join(' | ') }}
+        </p>
+        <p class="contact-line">
+            {{ [contact.linkedin, contact.github, contact.portfolio] | select | join(' | ') }}
+        </p>
+    </header>
+
+    {% if summary %}
+    <section>
+        <h2>Summary</h2>
+        <p>{{ summary }}</p>
+    </section>
+    {% endif %}
+
+    {% if experience %}
+    <section>
+        <h2>Experience</h2>
+        {% for e in experience %}
+            <div class="entry">
+                <div class="entry-head">
+                    <span><strong>{{ e.role }}</strong>, {{ e.company }}</span>
+                    <span class="dates">{{ e.start_date or '' }}{% if e.end_date %} - {{ e.end_date }}{% endif %}</span>
+                </div>
+                {% if e.description %}
+                <ul>
+                    {% for line in e.description.splitlines() if line.strip() %}
+                        <li>{{ line }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </section>
+    {% endif %}
+
+    {% if education %}
+    <section>
+        <h2>Education</h2>
+        {% for e in education %}
+            <div class="entry">
+                <div class="entry-head">
+                    <span><strong>{{ e.degree }}</strong>, {{ e.field_of_study }}, {{ e.institution }}</span>
+                    <span class="dates">{{ e.start_date or '' }}{% if e.end_date %} - {{ e.end_date }}{% endif %}</span>
+                </div>
+                {% if e.gpa %}<p>GPA: {{ e.gpa }}</p>{% endif %}
+            </div>
+        {% endfor %}
+    </section>
+    {% endif %}
+
+    {% if projects %}
+    <section>
+        <h2>Projects</h2>
+        {% for p in projects %}
+            <div class="entry">
+                <div class="entry-head">
+                    <span><strong>{{ p.title }}</strong>{% if p.link %} | {{ p.link }}{% endif %}</span>
+                    <span class="dates">{{ p.start_date or '' }}{% if p.end_date %} - {{ p.end_date }}{% endif %}</span>
+                </div>
+                {% if p.description %}
+                <ul>
+                    {% for line in p.description.splitlines() if line.strip() %}
+                        <li>{{ line }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </section>
+    {% endif %}
+
+    {% if skills %}
+    <section>
+        <h2>Skills</h2>
+        <p>{{ skills | map(attribute='skill_name') | join(', ') }}</p>
+    </section>
+    {% endif %}
+
+</div>
+</body>
+</html>

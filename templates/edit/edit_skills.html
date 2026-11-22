@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Skills - ResumeHub{% endblock %}
+
+{% block content %}
+    <h1>Skills</h1>
+
+    {% if skills %}
+        <ul class="skills">
+            {% for s in skills %}
+                <li>
+                    {{ s.skill_name }}
+                    <form action="/edit/skills/{{ s.skill_id }}/delete" method="post">
+                        <button type="submit">Remove</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No skills added yet.</p>
+    {% endif %}
+
+    <form action="/edit/skills" method="post">
+        <div>
+            <label for="skill_name">Add a skill</label>
+            <input type="text" id="skill_name" name="skill_name" placeholder="Python" required>
+        </div>
+        <button type="submit">Add</button>
+        <a href="/dashboard">Back to dashboard</a>
+    </form>
+{% endblock %}

@@ -1,0 +1,35 @@
+<!--  This is essentially the landing page of the website -->
+  
+{% extends "base.html" %}
+
+{% block content %}
+    <section class="hero">
+        <span class="eyebrow">Your one stop resume builder</span>
+        <h1>Build a clean, professional resume in minutes</h1>
+        <p class="lead">Fill in simple forms, preview your resume as you go, and download it as a PDF. Your data is saved to your account, so you can update it any time.</p>
+
+        <div class="hero-actions">
+            {% if current_user.is_authenticated %}
+                <a class="btn" href="/dashboard">Go to dashboard</a>
+            {% else %}
+                <a class="btn" href="/register">Get started</a>
+                <a class="btn btn-secondary" href="/login">Log in</a>
+            {% endif %}
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="feature">
+            <h3>Simple forms</h3>
+            <p>One short page per section, so you're never overwhelmed.</p>
+        </div>
+        <div class="feature">
+            <h3>Instant preview</h3>
+            <p>See exactly what your resume will look like at any point.</p>
+        </div>
+        <div class="feature">
+            <h3>ATS-friendly PDF</h3>
+            <p>A clean single-column layout that applicant tracking systems can read.</p>
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Edit summary - ResumeHub{% endblock %}
+
+{% block content %}
+    <h1>Professional summary</h1>
+    <p>Two or three sentences about who you are and what you're aiming for.</p>
+
+    <form action="/edit/summary" method="post">
+        <div>
+            <label for="content">Summary</label>
+            <textarea id="content" name="content" rows="6">{{ summary or '' }}</textarea>
+        </div>
+
+        <button type="submit">Save</button>
+        <a href="/dashboard">Back to dashboard</a>
+    </form>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - ResumeHub{% endblock %}
+
+{% block content %}
+    <h1>Welcome, {{ current_user.username }}</h1>
+    <p class="subtitle">Fill in each section, then preview your resume.</p>
+
+    <ul class="sections">
+        <li>
+            <a href="/edit/contact">Contact</a>
+            <!-- Each section is given a badge if it is complete or not -->
+            <span class="badge {% if status.contact %}badge-done{% else %}badge-todo{% endif %}">
+                {% if status.contact %}Done{% else %}Not started{% endif %}
+            </span>
+        </li>
+        <li>
+            <a href="/edit/summary">Summary</a>
+            <span class="badge {% if status.summary %}badge-done{% else %}badge-todo{% endif %}">
+                {% if status.summary %}Done{% else %}Not started{% endif %}
+            </span>
+        </li>
+        <li>
+            <a href="/edit/education">Education</a>
+            <!-- For these sections, it shows the number of entries as there can be more than 1 -->
+            <span class="badge {% if status.education %}badge-done{% else %}badge-todo{% endif %}">{{ status.education }} entries</span>
+        </li>
+        <li>
+            <a href="/edit/experience">Experience</a>
+            <span class="badge {% if status.experience %}badge-done{% else %}badge-todo{% endif %}">{{ status.experience }} entries</span>
+        </li>
+        <li>
+            <a href="/edit/skills">Skills</a>
+            <span class="badge {% if status.skills %}badge-done{% else %}badge-todo{% endif %}">{{ status.skills }} skills</span>
+        </li>
+        <li>
+            <a href="/edit/projects">Projects</a>
+            <span class="badge {% if status.projects %}badge-done{% else %}badge-todo{% endif %}">{{ status.projects }} entries</span>
+        </li>
+    </ul>
+
+    <div class="actions">
+        <!-- These buttons perform the actions of viewing the preview of the resume and downloading pdf respectively -->
+        <a class="btn" href="/preview">Preview resume</a>
+        <a class="btn btn-secondary" href="/download">Download PDF</a>
+    </div>
+{% endblock %}

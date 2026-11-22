@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Projects - ResumeHub{% endblock %}
+
+{% block content %}
+    <h1>Projects</h1>
+
+    {% if entries %}
+        <ul class="entries">
+            {% for e in entries %}
+                <li>
+                    <strong>{{ e.title }}</strong>
+                    <a href="/edit/projects/{{ e.project_id }}">Edit</a>
+                    <form action="/edit/projects/{{ e.project_id }}/delete" method="post"
+                          onsubmit="return confirm('Delete this entry?')">
+                        <button type="submit">Delete</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No projects yet.</p>
+    {% endif %}
+
+    <h2>{% if entry %}Edit project{% else %}Add a project{% endif %}</h2>
+
+    <form action="{% if entry %}/edit/projects/{{ entry.project_id }}{% else %}/edit/projects{% endif %}" method="post">
+        <div>
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title" value="{{ entry.title if entry else '' }}" required>
+        </div>
+
+        <div>
+            <label for="description">Description (one bullet point per line)</label>
+            <textarea id="description" name="description" rows="5">{{ entry.description if entry and entry.description else '' }}</textarea>
+        </div>
+
+        <div>
+            <label for="link">Link</label>
+            <input type="text" id="link" name="link" value="{{ entry.link if entry and entry.link else '' }}">
+        </div>
+
+        <div>
+            <label for="start_date">Start date</label>
+            <input type="text" id="start_date" name="start_date" value="{{ entry.start_date if entry and entry.start_date else '' }}">
+        </div>
+
+        <div>
+            <label for="end_date">End date</label>
+            <input type="text" id="end_date" name="end_date" value="{{ entry.end_date if entry and entry.end_date else '' }}">
+        </div>
+
+        <button type="submit">{% if entry %}Save changes{% else %}Add{% endif %}</button>
+        {% if entry %}<a href="/edit/projects">Cancel</a>{% endif %}
+        <a href="/dashboard">Back to dashboard</a>
+    </form>
+{% endblock %}

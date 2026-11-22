@@ -1,0 +1,90 @@
+
+
+/* This file contains the css for the resume of the user */
+
+/* This sets the dimensions and the margin for the page on which the 
+details of the resume will be displayed */
+
+/* AI assistance for the layout and styling with help from claude, 
+to set a skeleton and then i reviewed and adjusted the code. */
+@page {
+    size: A4;
+    margin: 14mm 16mm;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.4;
+    color: #111;
+    background: #e5e7eb;
+}
+
+/* for the preview of the resume */
+.resume {
+    max-width: 210mm;
+    margin: 20px auto;
+    padding: 16mm;
+    background: #fff;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.15);
+}
+
+.toolbar {
+    max-width: 210mm;
+    margin: 16px auto 0;
+    display: flex;
+    gap: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10pt;
+}
+
+header { text-align: center; margin-bottom: 10pt; }
+
+h1 {
+    margin: 0 0 4pt;
+    font-size: 22pt;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+
+.contact-line { margin: 0; font-size: 9.5pt; color: #333; }
+
+section { margin-top: 12pt; }
+
+h2 {
+    margin: 0 0 6pt;
+    padding-bottom: 2pt;
+    font-size: 10pt;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border-bottom: 0.6pt solid #888;
+}
+
+p { margin: 0 0 4pt; }
+
+.entry {
+    margin-bottom: 8pt;
+    break-inside: avoid;
+    page-break-inside: avoid;
+}
+
+.entry-head {
+    display: flex;
+    justify-content: space-between;
+}
+
+.dates { color: #444; white-space: nowrap; margin-left: 12pt; }
+
+ul { margin: 3pt 0 0; padding-left: 16pt; }
+li { margin-bottom: 2pt; }
+
+/* PDF and browser print: no grey background, no paper effect, no toolbar */
+@media print {
+    body { background: #fff; }
+    .resume { max-width: none; margin: 0; padding: 0; box-shadow: none; }
+    .toolbar { display: none; }
+}
