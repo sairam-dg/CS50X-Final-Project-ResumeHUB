@@ -1,6 +1,6 @@
 # ResumeHub: your one stop resume builder
 
-#### Video Demo: <YouTube URL>
+#### Video Demo: https://youtu.be/MeeRrvar99Y
 
 ## Description
 
